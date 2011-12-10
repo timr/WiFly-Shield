@@ -449,6 +449,20 @@ boolean WiFlyDevice::join(const char *ssid, const char *passphrase,
   return join(ssid);
 }
 
+boolean WiFlyDevice::join() {
+  /** Does a join. Can be called directly if the settings have been made
+  on the device in firmware **/
+  
+  if (sendCommand("join", false, "Associated!")) {
+    // TODO: Extract information from complete response?
+    // TODO: Change this to still work when server mode not active
+    waitForResponse("Listen on ");
+    skipRemainderOfResponse();
+    return true;
+  }
+  return false;  
+}
+
 
 #define IP_ADDRESS_BUFFER_SIZE 16 // "255.255.255.255\0"
 
