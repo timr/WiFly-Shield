@@ -189,7 +189,7 @@ int SpiUartDevice::read() {
 }
 
 
-void SpiUartDevice::write(byte value) {
+size_t SpiUartDevice::write(uint8_t value) {
   /*
   
     Write byte to UART.

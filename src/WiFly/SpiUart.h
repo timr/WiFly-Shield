@@ -59,7 +59,7 @@ class SpiUartDevice : public SpiDevice, public Print {
     void begin(unsigned long baudrate = BAUD_RATE_DEFAULT);
     byte available();
     int read();
-    void write(byte value);
+    size_t write(uint8_t value);
     void write(const char *str);
 #if ENABLE_BULK_TRANSFERS
     void write(const uint8_t *buffer, size_t size);

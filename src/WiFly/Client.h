@@ -18,9 +18,9 @@ class Client : public Print {
 
   boolean connect();
 
-  void write(byte value);
+  size_t write(uint8_t value);
   void write(const char *str);
-  void write(const uint8_t *buffer, size_t size);
+  size_t write(const uint8_t *buffer, size_t size);
 
   int available();
   int read();

@@ -36,10 +36,10 @@ Client::Client(const char* domain, uint16_t port) :
 }
 
 
-void Client::write(byte value) {
+size_t Client::write(uint8_t value) {
   /*
    */
-  _WiFly.uart.write(value);
+  return _WiFly.uart.write(value);
 }
 
 
@@ -50,10 +50,10 @@ void Client::write(const char *str) {
 }
 
 
-void Client::write(const uint8_t *buffer, size_t size) {
+size_t Client::write(const uint8_t *buffer, size_t size) {
   /*
    */
-  _WiFly.uart.write(buffer, size);
+  return _WiFly.uart.write(buffer, size);
 }
 
 
