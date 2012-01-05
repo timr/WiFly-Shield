@@ -9,7 +9,13 @@
 
 #include <string.h>
 
-#include "SpiUart.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
+#include "WProgram.h"
+#endif
+
+//#include "SpiUart.h"
 
 struct ring_buffer {
   unsigned char buffer[RX_BUFFER_SIZE];
@@ -34,12 +40,14 @@ private:
 
   bool _closed;
 
-  SpiUartDevice& _uart;
+  Stream* _uart;
 
 public:
-  ParsedStream(SpiUartDevice& theUart);
+  ParsedStream();
+  void begin(Stream* theUart);
   uint8_t available(void);
   int read(void);
+  int peek(void);
 
   bool closed();
 

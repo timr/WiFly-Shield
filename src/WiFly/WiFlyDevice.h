@@ -8,19 +8,23 @@
 class WiFlyDevice {
   public:
     WiFlyDevice(SpiUartDevice& theUart);
+
+    void setUart(Stream* newUart);
     void begin();
 
     boolean join(const char *ssid);
     boolean join(const char *ssid, const char *passphrase, 
                  boolean isWPA = true);
-
+    boolean join();
+    
     boolean configure(byte option, unsigned long value);
 
     const char * ip();
     
   private:
-    SpiUartDevice& uart;
-
+    SpiUartDevice& SPIuart;
+    Stream* uart;
+    boolean bDifferentUart;
     // Okay, this really sucks, but at the moment it works.
     // The problem is that we have to keep track of an active server connection
     // but AFAICT due to the way the WebClient example is written
